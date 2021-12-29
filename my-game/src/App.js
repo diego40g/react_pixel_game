@@ -1,7 +1,9 @@
-function App() {
-  return (
-    <div className="App">Hola mundo</div>
-  );
-}
+import ReactRogue from './ReactRogue.js'
+
+const App = () => (
+  <div className="App">
+    <ReactRogue/>
+  </div>
+)
 
 export default App;
