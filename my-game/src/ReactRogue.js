@@ -1,10 +1,12 @@
 import React,{useRef,useEffect,useState} from "react";
 import InputManager from "./inputManager";
 import Player from "./Player";
+import World from "./World";
 
 const ReactRogue = ({width,height,tilesize})=> {
     const canvasRef=useRef();
     const[player,setPlayer]=useState(new Player(1,2,tilesize));
+    const[world,setWorld]=useState(new World(width,height,tilesize));
     let inputManager=new InputManager();
     const handleInput=(action,data)=>{
         console.log(`handle input: ${action}:${JSON.stringify(data)}`);
@@ -34,6 +36,7 @@ const ReactRogue = ({width,height,tilesize})=> {
         //ctx.fillRect(12,22,16,16);
         /*ctx.fillStyle='#000';
         ctx.fillRect(player.x,player.y,16,16);*/
+        world.draw(ctx);
         player.draw(ctx);
     });
     return(
