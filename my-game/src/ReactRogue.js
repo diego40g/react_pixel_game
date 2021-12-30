@@ -1,15 +1,19 @@
 import React,{useRef,useEffect,useState} from "react";
 import InputManager from "./inputManager";
+import Player from "./Player";
 
 const ReactRogue = ({width,height,tilesize})=> {
     const canvasRef=useRef();
-    const[player,setPlayer]=useState({x:64,y:128});
+    const[player,setPlayer]=useState(new Player(1,2,tilesize));
     let inputManager=new InputManager();
     const handleInput=(action,data)=>{
         console.log(`handle input: ${action}:${JSON.stringify(data)}`);
-        let newPlayer={...player};
-        newPlayer.x+=data.x*tilesize;
-        newPlayer.y+=data.y*tilesize;
+        //let newPlayer={...player};
+        let newPlayer=new Player();
+        Object.assign(newPlayer,player);
+        newPlayer.move(data.x,data.y);
+        /*newPlayer.x+=data.x*tilesize;
+        newPlayer.y+=data.y*tilesize;*/
         setPlayer(newPlayer);
     };
 
@@ -27,9 +31,10 @@ const ReactRogue = ({width,height,tilesize})=> {
         console.log("Grafica el lienzo");
         const ctx=canvasRef.current.getContext("2d");
         ctx.clearRect(0,0,width*tilesize,height*tilesize);
-        ctx.fillStyle='#000';
         //ctx.fillRect(12,22,16,16);
-        ctx.fillRect(player.x,player.y,16,16);
+        /*ctx.fillStyle='#000';
+        ctx.fillRect(player.x,player.y,16,16);*/
+        player.draw(ctx);
     });
     return(
         <canvas 
