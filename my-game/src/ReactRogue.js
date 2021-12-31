@@ -5,19 +5,28 @@ import World from "./World";
 
 const ReactRogue = ({width,height,tilesize})=> {
     const canvasRef=useRef();
-    const[player,setPlayer]=useState(new Player(1,2,tilesize));
+    //const[player,setPlayer]=useState(new Player(1,2,tilesize));
     const[world,setWorld]=useState(new World(width,height,tilesize));
     let inputManager=new InputManager();
     const handleInput=(action,data)=>{
         console.log(`handle input: ${action}:${JSON.stringify(data)}`);
         //let newPlayer={...player};
-        let newPlayer=new Player();
-        Object.assign(newPlayer,player);
-        newPlayer.move(data.x,data.y);
+        let newWold=new World();
+        Object.assign(newWold,world);
+        newWold.movePlayer(data.x,data.y);
         /*newPlayer.x+=data.x*tilesize;
         newPlayer.y+=data.y*tilesize;*/
-        setPlayer(newPlayer);
+        setWorld(newWold);
     };
+
+    useEffect(()=>{
+        console.log("Crear Mapa!!!");
+        let newWold=new World();
+        Object.assign(newWold,world);
+        newWold.createCellularMap();
+        newWold.moveToSpace(world.player);
+        setWorld(newWold);
+    },[]);
 
     useEffect(()=>{
         console.log('Ingreso teclas');
@@ -37,7 +46,7 @@ const ReactRogue = ({width,height,tilesize})=> {
         /*ctx.fillStyle='#000';
         ctx.fillRect(player.x,player.y,16,16);*/
         world.draw(ctx);
-        player.draw(ctx);
+        //player.draw(ctx);
     });
     return(
         <canvas 
