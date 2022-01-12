@@ -1,6 +1,7 @@
 import React,{useRef,useEffect,useState} from "react";
 import InputManager from "./inputManager";
 import Player from "./Player";
+import Spawner from "./Spawner";
 import World from "./World";
 
 const ReactRogue = ({width,height,tilesize})=> {
@@ -16,6 +17,8 @@ const ReactRogue = ({width,height,tilesize})=> {
         newWold.movePlayer(data.x,data.y);
         /*newPlayer.x+=data.x*tilesize;
         newPlayer.y+=data.y*tilesize;*/
+        let spawner = new Spawner(newWold);
+        spawner.spawnLoot(10);
         setWorld(newWold);
     };
 
@@ -53,7 +56,7 @@ const ReactRogue = ({width,height,tilesize})=> {
             ref={canvasRef}
             width={width*tilesize} 
             height={height*tilesize}
-            style={{border:'1px solid black'}}
+            style={{border:'1px solid black', background: 'DimGray'}}
         ></canvas>
     );
 };
