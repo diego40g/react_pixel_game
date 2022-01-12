@@ -52,12 +52,19 @@ const ReactRogue = ({width,height,tilesize})=> {
         //player.draw(ctx);
     });
     return(
+        <>
         <canvas 
             ref={canvasRef}
             width={width*tilesize} 
             height={height*tilesize}
             style={{border:'1px solid black', background: 'DimGray'}}
         ></canvas>
+        <ul>
+            {world.player.inventory.map((item,index)=>(
+                <li key={index}>{item.attributes.name}</li>
+            ))}
+        </ul>
+        </>
     );
 };
 

@@ -22,6 +22,10 @@ class World{
         this.entities.push(entity);
     }
 
+    remove(entity){
+        this.entities=this.entities.filter(e=>e!==entity);
+    }
+
     //para no inicial en un punto bloqueado de paredes
     moveToSpace(entity){
         for(let x=entity.x;x<this.width;x++){
