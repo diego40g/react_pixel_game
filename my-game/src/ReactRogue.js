@@ -1,6 +1,6 @@
 import React,{useRef,useEffect,useState} from "react";
 import InputManager from "./inputManager";
-import Player from "./Player";
+//import Player from "./Player";
 import Spawner from "./Spawner";
 import World from "./World";
 
@@ -17,8 +17,6 @@ const ReactRogue = ({width,height,tilesize})=> {
         newWold.movePlayer(data.x,data.y);
         /*newPlayer.x+=data.x*tilesize;
         newPlayer.y+=data.y*tilesize;*/
-        let spawner = new Spawner(newWold);
-        spawner.spawnLoot(10);
         setWorld(newWold);
     };
 
@@ -28,6 +26,8 @@ const ReactRogue = ({width,height,tilesize})=> {
         Object.assign(newWold,world);
         newWold.createCellularMap();
         newWold.moveToSpace(world.player);
+        let spawner = new Spawner(newWold);
+        spawner.spawnLoot(10);
         setWorld(newWold);
     },[]);
 

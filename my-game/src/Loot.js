@@ -1,4 +1,4 @@
-import Entity from "./Entity";
+import Entity from "./Entity.js";
 
 class Loot extends Entity{
     action(verb, world){

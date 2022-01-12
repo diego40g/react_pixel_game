@@ -1,6 +1,7 @@
 import Entity from "./Entity";
 
-class Player{
+class Player extends Entity{
+
     attributes={
         name: 'Player',
         ascii: '@',
