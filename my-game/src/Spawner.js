@@ -1,4 +1,5 @@
-import Loot from './Loot.js'
+import Loot from './Loot.js';
+import Monster from './Monster.js';
 
 const lootTable=[
     {name:'Espada',color:'darkgrey',ascii:'/', offset:{x:6,y:3}},
@@ -6,6 +7,13 @@ const lootTable=[
     {name:'Moneda Oro',color:'yellow',ascii:'$', offset:{x:3,y:3}},
     {name:'Armadura',color:'lightgrey',ascii:'#', offset:{x:4,y:3}}
 ]
+
+const monsterTable=[
+    {name:'Ogre',color:'lightgrey',ascii:'0',offset:{x:2,y:3},health:6},
+    {name:'Kobold',color:'green',ascii:'k',offset:{x:4,y:3},health:3},
+    {name:'Slime',color:'darkgreen',ascii:'S',offset:{x:3,y:2},health:2},
+    {name:'Dragon',color:'red',ascii:'D',offset:{x:2,y:3},health:10}
+];
 
 class Spawner{
     constructor(world){
@@ -25,9 +33,22 @@ class Spawner{
                 getRandomInt(this.world.width),
                 getRandomInt(this.world.height),
                 this.world.tilesize,
-                lootTable[getRandomInt(lootTable.length)]);
+                lootTable[getRandomInt(lootTable.length)]
+            );
         });
     }
+    spawnMonsters(spawnCount){
+        this.spawn(spawnCount,()=>{
+            return new Monster(
+                getRandomInt(this.world.width),
+                getRandomInt(this.world.height),
+                this.world.tilesize,
+                monsterTable[getRandomInt(lootTable.length)]
+            );
+        });
+    }
+
+
 }
 
 function getRandomInt(max){
