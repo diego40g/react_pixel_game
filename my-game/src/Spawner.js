@@ -1,5 +1,6 @@
 import Loot from './Loot.js';
 import Monster from './Monster.js';
+import Stairs from './Stairs.js'
 
 const lootTable=[
     {name:'Espada',color:'darkgrey',ascii:'/', offset:{x:6,y:3}},
@@ -48,7 +49,11 @@ class Spawner{
         });
     }
 
-
+    spawnStairs(){
+        let stairs=new Stairs(this.world.width-10,this.world.health-10,this.world.tilesize);
+        this.world.add(stairs);
+        this.world.moveToSpace(stairs);
+    }
 }
 
 function getRandomInt(max){
